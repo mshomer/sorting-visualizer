@@ -1,0 +1,10 @@
+{
+  "hosting": {
+    "public": "dist/sorting-visualizer",
+    "ignore": [
+      "firebase.json",
+      "**/.*",
+      "**/node_modules/**"
+    ]
+  }
+}

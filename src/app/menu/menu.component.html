@@ -1,0 +1,146 @@
+<header>
+  <div class="row">
+    <div class="col-lg-auto col-md-12">
+      <h3>Sorting Visualizer</h3>
+    </div>
+
+    <div class="col-lg-auto col-md-12">
+      <label for="array-size" class="mr-2">Array Size</label>
+      <div class="range-wrap">
+        <input
+          #arraySize
+          type="range"
+          class="custom-range"
+          id="array-size"
+          min="4"
+          max="64"
+          [value]="data.size"
+          [attr.disabled]="sortingInProgress ? '' : null"
+          (input)="
+            arraySize.position = onInputRangeChange($event.target.value, 4, 64);
+            data.size = arraySize.value;
+            onSortingArraySizeChange($event.target.value)
+          "
+          (mouseleave)="arraySize.position = undefined"
+        />
+        <output
+          *ngIf="arraySize.position"
+          for="array-size"
+          [style.left]="arraySize.position"
+          >{{ arraySize.value }}</output
+        >
+      </div>
+    </div>
+
+    <div class="col-lg-auto col-md-12">
+      <label for="sorting-speed" class="mr-2">Sorting Speed</label>
+      <div class="range-wrap">
+        <input
+          #speed
+          type="range"
+          class="custom-range"
+          id="sorting-speed"
+          min="10"
+          max="90"
+          [attr.disabled]="sortingInProgress ? '' : null"
+          (input)="
+            speed.position = onInputRangeChange($event.target.value, 10, 90);
+            data.speed = 100 - speed.value
+          "
+          (mouseleave)="speed.position = undefined"
+        />
+        <output
+          *ngIf="speed.position"
+          for="sorting-speed"
+          [style.left]="speed.position"
+          >{{ speed.value }}</output
+        >
+      </div>
+    </div>
+
+    <div class="col-lg-auto col-md-12">
+      <div class="sort-algorithm">
+        <label
+          for="merge-sort"
+          class="mr-2"
+          [class.disabled]="sortingInProgress"
+          [class.active]="data.type === mergeSort.value"
+          >Merge Sort</label
+        >
+        <input
+          #mergeSort
+          type="radio"
+          id="merge-sort"
+          name="sort-algorithm"
+          value="merge-sort"
+          [attr.disabled]="sortingInProgress ? '' : null"
+          (change)="onSelectionChange(mergeSort.value)"
+        />
+        <label
+          for="quick-sort"
+          class="mr-2"
+          [class.disabled]="sortingInProgress"
+          [class.active]="data.type === quickSort.value"
+          >Quick Sort</label
+        >
+        <input
+          #quickSort
+          type="radio"
+          id="quick-sort"
+          name="sort-algorithm"
+          value="quick-sort"
+          [attr.disabled]="sortingInProgress ? '' : null"
+          (change)="onSelectionChange(quickSort.value)"
+        />
+        <label
+          for="heap-sort"
+          class="mr-2"
+          [class.disabled]="sortingInProgress"
+          [class.active]="data.type === heapSort.value"
+          >Heap Sort</label
+        >
+        <input
+          #heapSort
+          type="radio"
+          id="heap-sort"
+          name="sort-algorithm"
+          value="heap-sort"
+          [attr.disabled]="sortingInProgress ? '' : null"
+          (change)="onSelectionChange(heapSort.value)"
+        />
+        <label
+          for="bubble-sort"
+          [class.disabled]="sortingInProgress"
+          [class.active]="data.type === bubbleSort.value"
+          >Bubble Sort</label
+        >
+        <input
+          #bubbleSort
+          type="radio"
+          id="bubble-sort"
+          name="sort-algorithm"
+          value="bubble-sort"
+          [attr.disabled]="sortingInProgress ? '' : null"
+          (change)="onSelectionChange(bubbleSort.value)"
+        />
+      </div>
+    </div>
+
+    <div class="col-lg-auto col-md-12">
+      <button
+        class="btn mr-3"
+        (click)="onSort()"
+        [attr.disabled]="sortingInProgress ? '' : null"
+      >
+        Sort
+      </button>
+      <button
+        class="btn"
+        (click)="onStopSort()"
+        [attr.disabled]="sortingInProgress ? null : ''"
+      >
+        Stop
+      </button>
+    </div>
+  </div>
+</header>

@@ -1,0 +1,13 @@
+<section #section>
+  <div
+    *ngFor="let element of elements"
+    [style.width]="elementWidth"
+    [style.height]="element.height + 'px'"
+    [class.active]="element.active"
+    [class.sorted]="element.sorted"
+    [style.background]="element.background"
+    [style.fontSize]="elementFontSize"
+  >
+    {{ element.value }}
+  </div>
+</section>

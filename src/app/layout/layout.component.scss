@@ -1,0 +1,22 @@
+section {
+  display: flex;
+  justify-content: center;
+
+  div {
+    display: inline-block;
+    margin-left: 3px;
+    color: #22262a;
+    font-size: 28px;
+    text-align: center;
+    border: 1px solid #22262a;
+    background: #e9ecef;
+    border-top: none;
+
+    &.active {
+      background: #e49c00 !important;
+    }
+    &.sorted {
+      border-color: #00ff0d;
+    }
+  }
+}
